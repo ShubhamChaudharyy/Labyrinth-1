@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Labyrinth | Game ">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="google-signin-client_id" content="810089794288-qd9dii5peafrboqfmgbqqsk6f81eh89s.apps.googleusercontent.com">
+
+    
+    <!-- UI Sheets -->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="css/custom.css">
+    <link rel="stylesheet" type="text/css" href="css/footer.css">
+    <link rel="stylesheet" type="text/css" href="css/tiles.css">
+
+    <!-- Engine Scripts -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script type="text/javascript" src="js/Oauth.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/sweetalert2.min.js"></script>
+    <script type="text/javascript" src="js/translate.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script type="text/javascript" src="js/sound.js"></script>
+    <script type="text/javascript" src="js/tiles.js"></script>
+    <script type="text/javascript" src="js/levels.js"></script>
+    <script type="text/javascript" src="js/inventory.js"></script>
+    <script type="text/javascript" src="js/player.js"></script>
+    <script type="text/javascript" src="js/level.js"></script>
+    <script type="text/javascript" src="js/badges.js"></script>
+    <script type="text/javascript" src="js/sidebar.js"></script>
+    <script type="text/javascript" src="js/save.js"></script>
+    <script type="text/javascript" src="js/rate-game.js"></script>
+    <script type="text/javascript" src="js/gui.js"></script>
+    <script type="text/javascript" src="js/toggle_play_pause.js"></script>
+     <script type="text/javascript" src="js/sweetalert.min.js"></script>
+
+    <!-- favicon -->
+    <link rel="icon" type="image/png" href="images/logos/favicon.png" />
+
+    <title>Labyrinth</title>
+  </head>
+  <body>
+
+    <div class="overlay">
+        <div id="select-language">
+            <div class="title">
+                SELECT LANGUAGE
+            </div>
+            <div class="item"><a class="translate" id="overlay-en">
+                <img src="images/icons/UnitedKingdom.png" alt="" class="translation-flag" /> English</a>
+            </div>
+            <div class="item"><a class="translate" id="overlay-si">
+                    <img src="images/icons/SriLanka.png" alt="" class="translation-flag" /> Sinhala</a>
+            </div>
+            <div class="item"><a class="translate" id="overlay-hi">
+                <img src="images/icons/India.png" alt="" class="translation-flag" /> Hindi</a>
+            </div>
+            <div class="item"><a class="translate" id="overlay-pl">
+                <img src="images/icons/Poland.png" alt="" class="translation-flag" /> Polski</a>
+            </div>
+        </div>
+    </div>
+    
+		<!-- navbar -->
+    <div class="navbar-fixed">
+      <nav>
+        <div class="nav-wrapper">
+          <!-- sidebar icon-->
+          <ul class="left">
+            <li>
+              <a onclick="openSideBar();">
+              <i class="fa fa-bars" aria-hidden="true"></i> <!-- font-awesome icon used -->
+              </a>
+            </li>
+          </ul>
+          <!-- Labyrinth logo -->
+          <img class="brand-logo" src="images/logos/inline_light_bold.png" alt="logo">
+          <!-- Nav tabs on right. -->
+          <ul class="right hide-on-med-and-down">
+            <li class="menu">
+              <a href="howtoplay.html" class="lang waves-effect waves-light btn blue-grey darken-2" data-href="how" style="transform: translate(50px,-0px);font-size: 18px;">How to Play</a>
+            </li>
+            <li class="menu">
+              <a href="credits.html" class="lang waves-effect waves-light btn blue-grey darken-2" data-href="credit" style="transform: translate(20px,-0px);font-size: 18px;">Credits</a>
+            </li>
+            <li class="menu">
+              <a href="contributors.html" class="lang waves-effect waves-light btn blue-grey darken-2" data-href="contribute" style="transform: translateX(-50px,-30px);font-size: 18px;padding-left: -10px;">Contributors</a>
+            </li>
+  
+            
+            <li id="lan">
+              <div class="languagepicker roundborders large">
+                <div id="select">
+                  <a class="waves-effect waves-light btn blue-grey darken-2">
+                    <div class="lang" data-href="language" style="font-size: 18px;transform: translate(-40px,-10px);padding-left: 10px;">Select your language</div>
+                  </a>
+                </div>
+                <div class="item"><a class="translate" id="en">
+                  <img src="images/icons/UnitedKingdom.png" alt="" class="translation-flag" /> English</a>
+                </div>
+                <div class="item"><a class="translate" id="si">
+                    <img src="images/icons/SriLanka.png" alt="" class="translation-flag" /> Sinhala</a>
+                </div>
+                <div class="item"><a class="translate" id="hi">
+                  <img src="images/icons/India.png" alt="" class="translation-flag" /> Hindi</a>
+                </div>
+                <div class="item"><a class="translate" id="pl">
+                  <img src="images/icons/Poland.png" alt="" class="translation-flag" /> Polski</a>
+                </div>
+                <div class="item"><a class="translate" id="tl">
+                  <img src="images/icons/India.png" alt="" class="translation-flag" /> Tamil</a>
+                </div>
+
+                <!-- When you add more languages do it in the above format-->
+              </div>
+            </li>
+             <li >
+              <a href="" onclick="event.preventDefault()" class="lang waves-effect waves-light btn blue-grey darken-2" id="Milestone" style="vertical-align: center;transform: translate(-100px,10px);font-size: 18px;">Milestone Reached</a>
+            </li>
+            <style>
+                  .profile-pic{
+                        display: none;
+                  }
+                  .username{
+                    display: none;
+                  }
+                  .signout{
+                    display: none;
+                  }
+                  
+            </style>
+            <li><div class="g-signin2" data-onsuccess="onSignIn" style="transform: translate(-60px,30px);"></div><img class="profile-pic"  src="" style="border-radius: 50%;height: 30px;width: 30px;transform: translate(-40px,20px);"><button class="signout btn btn-active" onclick="signout()" style="cursor:pointer;transform:  translate(0px,-10px);margin-right: 5px;font-size: 10px;" >signout</button><div class="username" style="transform: translate(-40px,-30px);"></div>
+              </li>
+
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <!-- Side Bar -->
+    <div id="slide-out" class="side-nav full row left-column col s12">
+      <a href="#" onclick="closeSideBar();" class="close-sidebar"><i class="fa fa-times" aria-hidden="true"></i></a>
+      <div class="border1"></div>
+      <!-- Version -->
+      <div class="card-content white-text">
+        <span class="card-title"><a class="lang" data-href="version">Version</a></span>
+        <span class="versionSpan"><a href="" id="labyrinthVersion"></a></span>
+      </div>
+      <div class="border1"></div>
+      <!-- Characters -->
+      <div class="side-nav-card">
+        <div class="card-content white-text">
+          <span class="card-title">
+          <a href="pages/character_select/game.html" class="lang" data-href="character">Characters</a>
+          </span>
+        </div>
+      </div>
+      <div class="border1"></div>
+      <!-- Statistics -->
+      <div class="side-nav-card">
+        <div class="card-content white-text statistics">
+          <span class="card-title"><a class="lang" data-href="statistics">Statistics</a></span>
+          <p><a class="lang" data-href="moved">Player Moved :</a>
+            <span id="playerMoves">0</span><a class="lang" data-href="times"> Times</a>
+          </p>
+		  <p><a class="lang" data-href="discovered">Tiles Discovered :</a>
+          	<span id="discoveryDisplay">0</span>
+          </p>
+          <p><a class="lang" data-href="spent">Time spent :</a></p>
+            <div class="contTimer">
+               <span id="timer">00 : 00 : 00</span>
+            </div>
+
+
+            <script>
+                let eleBtnStart = document.querySelector("#btnStart");
+                let eleTimer = document.querySelector("#timer");
+
+                let timeTicker = (() => {
+                  var hours = minutes = seconds = 0;
+                  var timerTick;
+                  return {
+                    start : () => {
+                      if(!timerTick) {
+                      timerTick = setInterval(() => {
+                        seconds++;
+                        if(seconds == 60) {
+                          minutes += 1;
+                          seconds = 0;
+                          if(minutes == 60) {
+                            hours += 1;
+                            minutes = 0;
+                          }
+                        }
+                        eleTimer.innerHTML = `${hours.toString().length == 1 ? "0" + hours : hours}
+                : ${minutes.toString().length == 1 ? "0" + minutes : minutes}
+                : ${seconds.toString().length == 1 ? "0" + seconds : seconds}`;
+                      },25);
+                      }
+                    },
+                  }
+                })();
+            </script>
+          <div class="stats-btn" style="word-wrap: break-word;">
+            <ul class="stats-ul">
+              <li><input type="button" value="Save" onClick="saveTrigger()" class="waves-effect waves-light btn blue-grey darken-2"/></li>
+              <li><input type="button" value="Load last save" onClick="loadTrigger()" class="waves-effect waves-light btn blue-grey darken-2"/></li>
+              <li><input type="button" value="Change character" onClick="choosePlayerCharacter(player)" class="waves-effect waves-light btn blue-grey darken-2"/></li>
+              <li><input type="button" value="Get Path" onClick="show_p()" class="waves-effect waves-light btn blue-grey darken-2"/></li>
+              <li> <p id="pa"></p></li>
+	            <li><input type="button" value="Restart" onClick="reset()" class="waves-effect waves-light btn blue-grey darken-2"/></li>
+            </ul>
+      </div>
+     
+
+         <script type="text/javascript">
+                var key;
+                var path=[];
+                document.onkeydown = function(event) {
+                        switch (event.keyCode) {
+                            case 37:
+                                key = 37;
+                                path.push("LEFT");
+                                break;
+                            case 38:
+                                key = 38;
+                                path.push("UP");
+                                 break;
+                            case 39:
+                                key = 39;
+                                path.push("RIGHT");
+                                break;
+                            case 40:
+                                key = 40;
+                                path.push("DOWN");
+                                break;
+                           }
+                    };
+                     function show_p() {
+                         document.getElementById("pa").innerHTML = path;
+                    }
+                       var clickmilestone_event=document.getElementById('Milestone');
+        clickmilestone_event.addEventListener('click',function(){
+          
+            const wrapper = document.createElement('div');
+wrapper.innerHTML = "<img src='images/FireVector.jpg' style='width:55px;style='float:left;display:flex;flex-direction:row;'><span style='color:black;font-size:30px;'><b style=''>1000</b></span><img src='images/FireVector.jpg' style='width:55px;'>"
+            swal({
+ 
+  html:true,
+  title:"We've just reached the 1000 milestone!",
+  content:wrapper,
+        
+ 
+  icon: "success",
+button:false
+}); 
+        
+
+
+        });
+            </script>
+        </div>
+        <div class="border1"></div>
+        <!-- Audio controls. -->
+        <div class="card-content white-text">
+          <span class="card-title"><a class="lang" data-href="audio">Audio</a></span>
+          <p class="trackname"><a class="lang" data-href="now">Now Playing :</a><b><span id="backgroundSongName"></span></b><a class="lang" data-href="by"> by </a><b><span id="backgroundSongAuthor"></span></b></p>
+        </div>
+        <div class="card-action">
+          <div class="audiosetting">
+            <a class="waves-effect waves-light btn blue-grey darken-2" onclick="previousBackgroundAudio();" title="Previous Audio"><i class="fa fa-step-backward" aria-hidden="true"></i></a>
+            <a id="play" class="waves-effect waves-light btn blue-grey darken-2" onclick="startBackgroundAudio();" title="Play Audio"><i class="fa fa-play" aria-hidden="true"></i></a>
+            <a id="pause" class="waves-effect waves-light btn blue-grey darken-2" onclick="stopBackgroundAudio();" title="Stop"><i class="fa fa-pause" aria-hidden="true"></i></a>
+            <a class="waves-effect waves-light btn blue-grey darken-2" onclick="nextBackgroundAudio();" title="Next Audio"><i class="fa fa-step-forward" aria-hidden="true"></i></a>
+          </div>
+          <p class="range-field">
+            <input type="range" onchange="setVolume()" id='volume1' min=0 max=1 step=0.1 value='1'>
+          </p>
+          <h4 id="track-head" onclick="$('#changeTrackParent').fadeToggle();">Change Track  <span><i class="fa fa-caret-down"></i></span></h4>
+          <div id="changeTrackParent">
+          </div>
+          <script>
+          const ParentElement = document.getElementById("changeTrackParent")
+          backgroundAudio.forEach(function(element,index) {
+              ParentElement.innerHTML+=`<div class="track"><div><p>`+ element.backgroundSongName +`</p><p id="artist">`+element.author+`</p></div><div><a class="waves-effect waves-light btn blue-grey darken-2" onclick="playBgAudio('`+element.filename+`',`+index+`);"><i id='changeTrack`+index+`' class="fa fa-play"></i></a></div></div>`
+          });
+          </script>
+          <div id="tileLicense"></div>
+        </div>
+        <div class="border1"></div>
+        <!-- Share Game. -->
+        <div class="card-content white-text">
+          <span class="card-title"><a class="lang" data-href="share">Share Game</a></span>
+        </div>
+        <div class="card-action">
+          <div class="social-container">
+            <ul class="social-icons">
+              <li>
+                <a class="btn-floating  transparent waves-effect waves-light facebook social-icon" target="_blank" href="https://www.facebook.com/sharer.php?u=http://rawgit.com/fossasia/labyrinth/master/index.html">
+                <i class="fa fa-facebook"></i>
+                </a>
+              </li>
+              <li>
+                <a class="btn-floating transparent waves-effect waves-light twitter social-icon" target="_blank" href="https://twitter.com/share?url=http://rawgit.com/fossasia/labyrinth/master/index.html">
+                <i class="fa fa-twitter"></i>
+                </a>
+              </li>
+              <li>
+                <a class="btn-floating transparent waves-effect waves-light googleplus social-icon" target="_blank" href="https://plus.google.com/share?url=http://rawgit.com/fossasia/labyrinth/master/index.html">
+                <i class="fa fa-google-plus"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="border1"></div>
+        <!-- Follow the game. -->
+        <div class="card-content white-text">
+          <span class="card-title"><a class="lang" data-href="follow">Follow us on</a></span>
+        </div>
+        <div class="card-action">
+          <div class="social-container">
+            <ul class="social-icons">
+              <li>
+                <a class="btn-floating  transparent waves-effect waves-light facebook social-icon" target="_blank" href="http://facebook.com/fossasia">
+                <i class="fa fa-facebook"></i>
+                </a>
+              </li>
+              <li>
+                <a class="btn-floating transparent waves-effect waves-light twitter social-icon" target="_blank" href="http://twitter.com/fossasia">
+                <i class="fa fa-twitter"></i>
+                </a>
+              </li>
+              <li>
+                <a class="btn-floating transparent waves-effect waves-light youtube social-icon" target="_blank" href="https://www.youtube.com/fossasiaorg">
+                <i class="fa fa-youtube-play"></i>
+                </a>
+              </li>
+              <li>
+                <a class="btn-floating transparent waves-effect waves-light linkedin social-icon" target="_blank" href="https://www.linkedin.com/groups/FOSSASIA-3762811">
+                <i class="fa fa-linkedin"></i>
+                </a>
+              </li>
+              <li>
+                <a class="btn-floating transparent waves-effect waves-light googleplus social-icon" target="_blank" href="https://plus.google.com/108920596016838318216">
+                <i class="fa fa-google-plus"></i>
+                </a>
+              </li>
+              <li>
+                <a class="btn-floating transparent waves-effect waves-light github social-icon" target="_blank" href="https://github.com/fossasia">
+                <i class="fa fa-github"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="border1"></div>
+        <!-- Inventory. -->
+        <div class="card-content white-text">
+          <span class="card-title"><a class="lang" data-href="invent">Inventory</a></span>
+          <ul class="collection black-text" id="inventoryDisplay">
+            <!-- SAMPLE ITEM
+              <li class="collection-item avatar">
+                <img src="images/yuna.jpg" alt="" class="circle">
+                <span class="title">Title</span>
+                <p>First Line <br>
+                Second Line
+                </p>
+                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+              </li>
+              -->
+            <!-- SAMPLE ITEM WITH ICON
+              <li class="collection-item avatar">
+              <i class="material-icons circle">folder</i>
+              <span class="title">Title</span>
+              <p>First Line <br>
+              Second Line
+              </p>
+              <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+              </li>
+              -->
+          </ul>
+        </div>
+        <div class="border1"></div>
+        <!-- Badges. -->
+        <div class="card-content white-text">
+          <span class="card-title"><a class="lang" data-href="badge">Your Badges <span id="badge_count"></span></a></span>
+          <ul class="collection black-text" id="badgesDisplay"></ul>
+        </div>
+        <div class="border1"></div>
+        <!-- Contribute Section. -->
+        <div class="side-nav-card">
+          <div class="card-content white-text">
+            <span class="card-title">
+            <a href="https://github.com/fossasia/labyrinth" class="lang" data-href="contribute">Contribute</a>
+            </span>
+          </div>
+        </div>
+        <div class="border1"></div>
+        <!-- Rate Game. -->
+        <div class="card-content white-text">
+          <span class="card-title"><a class="lang" data-href="rate">Rate game</a></span><br>
+          <span><a class="lang" data-href="rate-question">How do you enjoy the game so far?</a></span>
+          <div id="rate-game">
+            <ul class="rate-game">
+              <li><i class="fa fa-thumbs-up fa-5x" aria-hidden="true" onClick="thankYouLike()" ></i></li>
+              <li><i class="fa fa-thumbs-down fa-5x" aria-hidden="true" onClick="thankYouDislike()"></i></li>
+            </ul>
+          </div>
+          <!-- Icon Copyrights. -->
+          <div>
+            <a class="lang" data-href="made-by">Icon made by </a><a href="https://www.flaticon.com/authors/gregor-cresnar" title="Gregor Cresnar">Gregor Cresnar</a>
+            <div class="lang" data-href="from"> from </div>
+            <a href="https://www.flaticon.com/" title="Flaticon">
+              <div class="lang" data-href="flaticon.com"></div>
+              www.flaticon.com
+            </a>
+            <div class="lang" data-href="licensed-by"> is licensed by </div>
+            <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">
+              <div class="lang" data-href="licensed">CC 3.0 BY</div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Control Buttons -->
+    <div class="fixed-action-btn play-pause-div">
+      <a class="btn-floating btn-large red" id="play-pause-float" onclick="playPauseFloat();">
+        <i class="fa fa-pause"></i>
+      </a>
+    </div>
+    <div class="fixed-action-btn toolbar">
+      <a class="btn-floating btn-large red">
+        <i class="large material-icons">directions_run</i>
+      </a>
+      <ul>
+        <li class="waves-effect waves-light" id="upKey" onclick="keyHandlers.ArrowUp()">
+          <a>
+          <i class="material-icons-arrow">arrow_upward</i>
+          </a>
+        </li>
+        <li class="waves-effect waves-light" id="leftKey" onclick="keyHandlers.ArrowLeft()">
+          <a>
+          <i class="material-icons-arrow">arrow_back</i>
+          </a>
+        </li>
+        <li class="waves-effect waves-light" id="rightKey" onclick="keyHandlers.ArrowRight()">
+          <a>
+          <i class="material-icons-arrow">arrow_forward</i>
+          </a>
+        </li>
+        <li class="waves-effect waves-light" id="downKey" onclick="keyHandlers.ArrowDown()">
+          <a>
+          <i class="material-icons-arrow">arrow_downward</i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Game Tiles  -->
+  <div id="tiles"></div>
+
+</body>
+</html>

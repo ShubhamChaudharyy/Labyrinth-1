@@ -1,0 +1,15 @@
+{
+  "name": "@Labyrinth/labyrinth",
+  "version": "0.1.0",
+  "description": "The Labyrinth Game",
+  "repository": "https://github.com/fossasia/labyrinth",
+  "license": "MIT",
+  "private": false,
+  "author": "FOSSASIA Labyrinth Team",
+  "devDependencies": {
+    "surge": "latest"
+  },
+  "scripts": {
+    "compile": "echo \"If you’re using a static site generator or other compilation step, you could run it here!\""
+  }
+}

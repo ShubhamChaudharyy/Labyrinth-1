@@ -1,0 +1,20 @@
+sudo: required
+dist: trusty
+language: ruby
+cache:
+  bundler: true
+  directories:
+     - node_modules
+rvm:
+  - 2.3.3
+install:
+  - bash scripts/check-javascript-syntax-errors.sh
+  - bash scripts/check-html-syntax-errors.sh
+  - bash ./scripts/deploy.sh
+  - bundle install
+  - bundle exec img_checker
+
+branches:
+  only:
+     - master
+     - /./
